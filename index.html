@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            ;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: #333;
+            margin-bottom: 650px;
+            margin-left: 100px;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #fff; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        
+        }
+        
+        .calculator {
+            background: #faf9f5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            height: 500px;
+            margin-top: 20px;
+            margin-left: -380px;
+        }
+        .display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+            margin-left: -10px;
+            text-align: right;
+            font-size: 1.5em;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #f5f1f1;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+            height: 70px;
+        }
+        
+
+        .button:hover {
+            background: #0056b3;
+        }
+        .button.operator {
+            background: #28a745;
+        }
+        .button.operator:hover {
+            background: #1e7e34;
+        }
+        .button.clear {
+            background: #dc3545;
+        }
+        .button.clear:hover {
+            background: #c82333;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        @media screen and (max-width: 600px) {
+            .calculator {
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
+            .h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                margin-left: -50px;
+                margin-top: 20px;
+            }
+
+            
+            .display {
+                font-size: 1.2em;
+                width: 95%;
+                margin-left: 0.5px;
+            }
+            .button {
+                font-size: 1em;
+                height: 50px;
+            }
+            .buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .button.operator {
+                height: 50px;
+            }
+            .button.clear {
+                height: 50px;
+            }
+
+            .button:hover {
+                height: 50px;
+            }
+            .button.operator:hover {
+                height: 50px;
+            }
+            .button.clear:hover {
+                height: 50px;
+            }
+
+            .button:active {
+                height: 50px;
+            }
+            .button.operator:active {
+                height: 50px;
+            }
+            .button.clear:active {
+                height: 50px;
+            }
+
+            .button:active {
+                transform: scale(0.95);
+            }
+            .button.operator:active {
+                transform: scale(0.95);
+            }
+
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>CALCULATOR</h1>
+    <div class="calculator">
+        <input type="text" class="display" id="display" enabled>
+        <div class="buttons">
+            <button class="button" onclick="appendValue('7')">7</button>
+            <button class="button" onclick="appendValue('8')">8</button>
+            <button class="button" onclick="appendValue('9')">9</button>
+            <button class="button operator" onclick="appendValue('/')">/</button>
+            <button class="button" onclick="appendValue('4')">4</button>
+            <button class="button" onclick="appendValue('5')">5</button>
+            <button class="button" onclick="appendValue('6')">6</button>
+            <button class="button operator" onclick="appendValue('*')">*</button>
+            <button class="button" onclick="appendValue('1')">1</button>
+            <button class="button" onclick="appendValue('2')">2</button>
+            <button class="button" onclick="appendValue('3')">3</button>
+            <button class="button operator" onclick="appendValue('-')">-</button>
+            <button class="button" onclick="appendValue('0')">0</button>
+            <button class="button" onclick="appendValue('.')">.</button>
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button operator" onclick="appendValue('+')">+</button>
+            <button class="button operator" style="grid-column: span 4;" onclick="calculate()">=</button>
+
+
+            
+        
+    </div>
+    <script>
+        
+        function appendValue(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                const result = Function('"use strict"; return (' + display.value + ')')();
+                display.value = result;
+            } catch {
+                display.value = 'Error';
+            }
+        }
+
+       
+        
+    </script>
+</body>
+</html>
